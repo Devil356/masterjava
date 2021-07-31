@@ -30,18 +30,21 @@ public class MatrixUtil {
         final int bRows = matrixB.length;
 
         int thatColumn[] = new int[bRows];
-        for (int i = 0; i < bColumns; i++) {
-            for (int l = 0; l < aColumns; l++) {
-                thatColumn[l] = matrixB[l][i];
-            }
-            for (int j = 0; j < matrixSize; j++) {
-                int thisRow[] = matrixA[j];
-                int sum = 0;
-                for (int k = 0; k < matrixSize; k++) {
-                    sum += thisRow[k] * thatColumn[k];
+        try {
+            for (int i = 0; i < bColumns; i++) {
+                for (int l = 0; l < aColumns; l++) {
+                    thatColumn[l] = matrixB[l][i];
                 }
-                matrixC[j][j] = sum;
+                for (int j = 0; j < matrixSize; j++) {
+                    int thisRow[] = matrixA[j];
+                    int sum = 0;
+                    for (int k = 0; k < matrixSize; k++) {
+                        sum += thisRow[k] * thatColumn[k];
+                    }
+                    matrixC[j][j] = sum;
+                }
             }
+        } catch (IndexOutOfBoundsException ignored) {
         }
         return matrixC;
     }
