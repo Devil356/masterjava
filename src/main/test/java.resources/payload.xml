@@ -1,0 +1,34 @@
+<!--сперва идет объявление самого неймспейса (прим. xmlns:xsi), для которого необходимо создать uri, на который
+будет ссылаться этот неймспейс. И у этого неймспейса должна быть объявлена схема xsd.
+Которая объявляется ниже в schemaLocation через объявления uri неймспейса и затем самой схемы xsd.
+Сама xsd схема нужна для валидации xml документа. Она выступает в качестве спецификации, чтобы говорить, что
+"тут не верно и тут". Таким образом, xml док-т расширяется и получает новую функциональность. Создается жесткая
+структура. Описывается языком XMLSchema в файле xsd, который сам является xml файлом
+URL при объявлении неймспейса служит просто уникальным идентификатором, чтобы быть уверенным, что такого же неймспейса
+точно не будет-->
+<Payload xmlns="http://javaops.ru"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://javaops.ru payload.xsd"
+>
+    <Users>
+<!--          flag называется атрибутом-->
+        <User flag="active" city="kiv">
+<!--         email называется элементом -->
+            <email>gmail@gmail.com</email>
+            <fullName>Full Name</fullName>
+        </User>
+        <User flag="superuser" city="spb">
+            <email>admin@gmail.com</email>
+            <fullName>Admin</fullName>
+        </User>
+        <User flag="deleted" city="spb">
+            <email>mail@yandex.ru</email>
+            <fullName>Deleted</fullName>
+        </User>
+    </Users>
+    <Cities>
+        <City id="kiv">Kiev</City>
+        <City id="spb">Saint Petersburg</City>
+        <City id="mnsk">Minsk</City>
+    </Cities>
+</Payload>
