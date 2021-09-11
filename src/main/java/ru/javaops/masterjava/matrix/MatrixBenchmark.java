@@ -39,6 +39,15 @@ public class MatrixBenchmark {
     @Param({/*"100", */"1000"})
     private int matrixSize;
 
+    //класс с аннотацией @State
+    //класс, если вложен, должен иметь модификатор static.
+    //класс должен быть public
+    //класс должен иметь только конструктор без параметров
+    @State(Scope.Thread)
+    public static class Example {
+
+    }
+
     private static final int THREAD_NUMBER = 10;
     private static final ExecutorService executor = Executors.newFixedThreadPool(THREAD_NUMBER);
 
@@ -46,6 +55,8 @@ public class MatrixBenchmark {
     private static int[][] matrixB;
 
     //аннотация, помечающая метод инициализации (аналогично как в junit) матриц
+    //МОЖЕТ РАСПОЛАГАТЬСЯ ВНУТРИ КЛАССА С АННОТАЦИЕЙ @State
+    //Принимает 3 параметра: Trial, Iteration, Invocation
     @Setup
     public void setUp() {
         matrixA = MatrixUtil.create(matrixSize);
@@ -65,12 +76,42 @@ public class MatrixBenchmark {
     /**
      * аннотация, помечающая метод, в котором будет производиться сам бенчмарк. В таких методах ОБЯЗАТЕЛЬНО
      * возвращать результат, иначе измерять по сути ничего не будем
+     * Также оптимизатор может использовать константы для оптимизации кода. Если значения в код не подставляются
+     * динамически, то компилятор опустит эти константы. Чтобы компилятор не оптимизировал константы, необходимо
+     * использовать их из объекта с аннотацией State.
      * либо 2 вариант: использовать класс Blackhole bh в параметре метода.
-     * Который делает consume для методов и ничего не возвращает. Пример:
-     * @Benchmark
-     * public int[][] singleThreadMultiply(Blackhole bh) {
-     *   bh.consume(MatrixUtil.singleThreadMultiplyOpt(matrixA, matrixB));
-     * }
+     * Который делает consume для нашего кода и ничего не возвращает. Консьюмов может быть много. Пример:
+     *
+     *     @Benchmark
+     *     public int[][] singleThreadMultiply(Blackhole bh) {
+     *          bh.consume(MatrixUtil.singleThreadMultiplyOpt(matrixA, matrixB));
+     *     }
+     *
+     * OR
+     *
+     *     @Benchmark
+     *     public void testMethod(MyState state, Blackhole blackhole) {
+     *         int sum1 = state.a + state.b;
+     *         int sum2 = state.a + state.a + state.b + state.b;
+     *
+     *         blackhole.consume(sum1);
+     *         blackhole.consume(sum2);
+     *     }
+     *
+     * OR
+     *
+     *     @State(Scope.Thread)
+     *     public static class MyState {
+     *         public int a = 1;
+     *         public int b = 2;
+     *     }
+     *
+     *
+     *     @Benchmark
+     *     public int testMethod(MyState state) {
+     *         int sum = state.a + state.b;
+     *         return sum;
+     *     }
      * Для того, чтобы метод не проходил бенчмарк, достаточно убрать аннотацию.
      * Вывод: Score - вывод в аннотации @OutputTimeUnit
      */
@@ -88,6 +129,8 @@ public class MatrixBenchmark {
 
     //аннотация, помечающая метод, в котором содержится логика для корректного завершения программы, то, что выполнится
     //после выполнения самого бенчмарка
+    //МОЖЕТ РАСПОЛАГАТЬСЯ ВНУТРИ КЛАССА С АННОТАЦИЕЙ @State
+    //Принимает 3 параметра: Trial, Iteration, Invocation
     @TearDown
     public void tearDown() {
         executor.shutdown();
