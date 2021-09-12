@@ -17,7 +17,7 @@ import java.net.URL;
  * потоков врывались туда. Поэтому или synchronized, или ThreadLocal использовать или еще какие-то вещи
  */
 public class Schemas {
-    private static final SchemaFactory SCHEMA_FACTORY = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_INSTANCE_NS_URI);
+    private static final SchemaFactory SCHEMA_FACTORY = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
 
     public static synchronized Schema ofString(String xsd){
         try {
