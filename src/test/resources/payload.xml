@@ -1,57 +1,31 @@
 <Payload xmlns="http://javaops.ru"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://javaops.ru payload.xsd">
-    <Users>
-        <User flag="active" city="kiv" email="gmail@gmail.com">
-            <fullName>Full Name</fullName>
-            <groupList>
-                topjava07
-                masterjava02
-            </groupList>
-        </User>
-        <User flag="superuser" city="spb" email="admin@javaops.ru">
-            <fullName>Admin</fullName>
-            <groupList>
-                topjava07
-                topjava08
-                masterjava02
-            </groupList>
-        </User>
-        <User flag="deleted" city="spb" email="mail@yandex.ru">
-            <fullName>Deleted</fullName>
-            <groupList>
-                topjava01
-                topjava02
-                masterjava01
-            </groupList>
-        </User>
-    </Users>
+
+    <Projects>
+        <Project name="topjava">
+            <description>Topjava</description>
+            <Group name="topjava01" type="FINISHED"/>
+            <Group name="topjava02" type="FINISHED"/>
+            <Group name="topjava07" type="CURRENT"/>
+            <Group name="topjava08" type="REGISTERING"/>
+        </Project>
+        <Project name="masterjava">
+            <description>Masterjava</description>
+            <Group name="masterjava01" type="FINISHED"/>
+            <Group name="masterjava02" type="CURRENT"/>
+            <Group name="masterjava03" type="REGISTERING"/>
+        </Project>
+    </Projects>
     <Cities>
         <City id="spb">Санкт-Петербург</City>
+        <City id="mow">Москва</City>
         <City id="kiv">Киев</City>
         <City id="mnsk">Минск</City>
     </Cities>
-    <Projects>
-        <Project id="masterjava">
-            <fullName>MasterJava</fullName>
-            <description>Проект для продвинутого изучения Java</description>
-        </Project>
-        <Project id="topjava">
-            <fullName>TopJava</fullName>
-            <description>Проект для среднего изучения Java</description>
-        </Project>
-    </Projects>
-    <Groups>
-        <Group id="topjava01" type="FINISHED" project-id="topjava"/>
-        <Group id="topjava02" type="FINISHED" project-id="topjava"/>
-        <Group id="topjava03" type="FINISHED" project-id="topjava"/>
-        <Group id="topjava04" type="FINISHED" project-id="topjava"/>
-        <Group id="topjava05" type="FINISHED" project-id="topjava"/>
-        <Group id="topjava06" type="FINISHED" project-id="topjava"/>
-        <Group id="topjava07" type="CURRENT" project-id="topjava"/>
-        <Group id="topjava08" type="REGISTERING" project-id="topjava"/>
-        <Group id="masterjava01" type="FINISHED" project-id="masterjava"/>
-        <Group id="masterjava02" type="CURRENT" project-id="masterjava"/>
-        <Group id="masterjava03" type="REGISTERING" project-id="masterjava"/>
-    </Groups>
+    <Users>
+        <User flag="active" city="kiv" email="gmail@gmail.com" groupRefs="topjava07 masterjava02">Full Name</User>
+        <User flag="superuser" city="spb" email="admin@javaops.ru" groupRefs="topjava07 topjava08 masterjava02">Admin</User>
+        <User flag="deleted" city="spb" email="mail@yandex.ru" groupRefs="topjava01 topjava02 masterjava01">Deleted</User>
+    </Users>
 </Payload>
