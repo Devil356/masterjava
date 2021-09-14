@@ -1,3 +1,4 @@
+<!--Схема валидации-->
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns="http://javaops.ru"
            xmlns:xs="http://www.w3.org/2001/XMLSchema"
@@ -72,6 +73,7 @@
                     <xs:attribute name="email" type="emailAddressType"/>
                     <xs:attribute name="flag" type="flagType" use="required"/>
                     <xs:attribute name="city" type="xs:IDREF" use="required"/>
+<!--                    IDREFS внутри это xml list-->
                     <xs:attribute name="groupRefs" type="xs:IDREFS" use="optional"/>
                 </xs:extension>
             </xs:simpleContent>
