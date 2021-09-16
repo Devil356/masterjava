@@ -1,0 +1,1 @@
+mail-service - модуль отсылки почты. Транспорт: JAX-WS, JAX-RS, JMX, AKKA
