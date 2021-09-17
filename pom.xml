@@ -16,10 +16,9 @@
     <url>https://github.com/JavaOPs/masterjava</url>
 
     <modules>
-        <module>web</module>
-<!--        <module>upload</module>-->
+        <module>upload</module>
         <module>common</module>
-<!--        <module>webapp</module>-->
+        <module>webapp</module>
         <module>mail-service</module>
         <module>mail-api</module>
         <module>test</module>
